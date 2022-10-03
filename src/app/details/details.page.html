@@ -1,0 +1,26 @@
+<ion-header class="unselectable">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="unselectable">
+  <ion-icon name="happy" slot="end"></ion-icon>
+  <ion-label>
+    <h2>{{film.title}}</h2>
+    <img src="{{film.posterUrl}}" alt="Image Error">
+    <br>
+    <p><ion-icon name="calendar-outline"></ion-icon> Année : {{film.year}}</p>
+    <br>
+    <p><ion-icon name="film-outline"></ion-icon> Genres : {{film.genres}}</p>
+    <br>
+    <p><ion-icon name="man-outline"></ion-icon> Directeur : {{film.director}}</p>
+    <br>
+    <p><ion-icon name="people-outline"></ion-icon> Acteurs : {{film.actors}}</p>
+    <br>
+    <p><ion-icon name="help-outline"></ion-icon> Synopsis : {{film.plot}}</p>
+  </ion-label>
+</ion-content>
