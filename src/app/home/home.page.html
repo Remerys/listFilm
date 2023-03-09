@@ -11,11 +11,11 @@
 
 <ion-content class="unselectable">
   <ion-item *ngFor="let movie of moviesList" (click)="displayDetails(movie)" class="ion-activatable ripple-parent">
-    <ion-thumbnail slot="start"><img src="{{movie.posterUrl}}" alt="Image Error"></ion-thumbnail>
+    <ion-thumbnail slot="start"><img src="{{movie.image}}" alt="Image Error"></ion-thumbnail>
     <ion-label>
-      <h2>{{movie.title}}</h2>
-      <h3>{{movie.year}}</h3>
-      <h3>{{movie.genres}}</h3>
+      <h2>{{movie.titre}}</h2>
+      <!-- <h3>{{movie.year}}</h3>
+      <h3>{{movie.genres}}</h3> -->
     </ion-label>
   </ion-item>
 </ion-content>

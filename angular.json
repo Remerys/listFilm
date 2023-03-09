@@ -127,6 +127,8 @@
             ]
           }
         },
+
+
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
@@ -141,7 +143,32 @@
               "devServerTarget": "app:serve:ci"
             }
           }
+        },
+        "ionic-cordova-build": {
+          "builder": "@ionic/cordova-builders:cordova-build",
+          "options": {
+            "browserTarget": "app:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "app:build:production"
+            }
+          }
+        },
+        "ionic-cordova-serve": {
+          "builder": "@ionic/cordova-builders:cordova-serve",
+          "options": {
+            "cordovaBuildTarget": "app:ionic-cordova-build",
+            "devServerTarget": "app:serve"
+          },
+          "configurations": {
+            "production": {
+              "cordovaBuildTarget": "app:ionic-cordova-build:production",
+              "devServerTarget": "app:serve:production"
+            }
+          }
         }
+
       }
     }
   },
@@ -149,7 +176,7 @@
     "schematicCollections": [
       "@ionic/angular-toolkit"
     ],
-    "analytics": "164eeb11-fd63-43d0-9f74-00e7c5ec6d0e"
+    "analytics": false
   },
   "schematics": {
     "@ionic/angular-toolkit:component": {

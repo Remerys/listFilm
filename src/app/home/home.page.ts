@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavigationExtras } from '@angular/router';
@@ -10,7 +11,12 @@ import { NavigationExtras } from '@angular/router';
 export class HomePage {
   moviesList = []
   constructor(private router: Router) {
-    fetch('./assets/films-json.json').then(res => res.json()).then(
+    // fetch('./assets/films-json.json').then(res => res.json()).then(
+    //   json => {
+    //     this.moviesList = json
+    //   }
+    // )
+    fetch('http://127.0.0.1:8001/api/series').then(res => res.json()).then(
       json => {
         this.moviesList = json
       }

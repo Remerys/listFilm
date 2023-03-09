@@ -9,7 +9,7 @@
 
 <ion-content class="unselectable">
   <ion-icon name="happy" slot="end"></ion-icon>
-  <ion-label>
+  <!-- <ion-label>
     <h2>{{film.title}}</h2>
     <img src="{{film.posterUrl}}" alt="Image Error">
     <br>
@@ -22,5 +22,15 @@
     <p><ion-icon name="people-outline"></ion-icon> Acteurs : {{film.actors}}</p>
     <br>
     <p><ion-icon name="help-outline"></ion-icon> Synopsis : {{film.plot}}</p>
+  </ion-label> -->
+  <ion-label>
+    <h2>{{film.titre}}</h2>
+    <img src="{{film.image}}" alt="Image Error">
+    <br>
+    <p><ion-icon name="calendar-outline"></ion-icon> Première diffusion : {{film.premiereDiffusion}}</p>
+    <br>
+    <p><ion-icon name="people-outline"></ion-icon> Durée : {{film.duree}} minutes</p>
+    <br>
+    <p><ion-icon name="help-outline"></ion-icon> Synopsis : {{film.resume}}</p>
   </ion-label>
 </ion-content>
