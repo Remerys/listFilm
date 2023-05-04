@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Favoris</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list *ngFor="let favoris of favoriteFilmList">
+    <ion-item>
+      <ion-icon name="star" slot="start" (click)="removeFavorite(favoris)"></ion-icon>
+        <ion-thumbnail slot="start"><img src="{{favoris.image}}" alt="Image Error"></ion-thumbnail>
+        <ion-label>
+          <h2>{{favoris.titre}}</h2>
+        </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

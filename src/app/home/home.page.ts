@@ -1,7 +1,7 @@
 /* eslint-disable prefer-const */
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { NavigationExtras } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +11,10 @@ import { NavigationExtras } from '@angular/router';
 export class HomePage {
   searchTerm: string
   moviesList = []
-  constructor(private router: Router) {
+  favoriteFilmList: any
+  idFavoriteList: any = []
+
+  constructor(private router: Router, private storage: Storage) {
     // fetch('./assets/films-json.json').then(res => res.json()).then(
     //   json => {
     //     this.moviesList = json
@@ -22,6 +25,40 @@ export class HomePage {
         this.moviesList = json
       }
     )
+
+    this.storage.get('favoriteFilmsList').then(val => {
+      if (val != null) {
+        this.favoriteFilmList = val
+      } else {
+        this.favoriteFilmList = []
+      }
+    })
+
+    this.storage.get('idFavoriteFilmsList').then(val => {
+      if (val != null) {
+        this.idFavoriteList = val
+      } else {
+        this.idFavoriteList = []
+      }
+    })
+  }
+
+  ionViewWillEnter() {
+    this.storage.get('favoriteFilmsList').then(val => {
+      if (val != null) {
+        this.favoriteFilmList = val
+      } else {
+        this.favoriteFilmList = []
+      }
+    })
+
+    this.storage.get('idFavoriteFilmsList').then(val => {
+      if (val != null) {
+        this.idFavoriteList = val
+      } else {
+        this.idFavoriteList = []
+      }
+    })
   }
 
   displayDetails(item) {
@@ -33,22 +70,33 @@ export class HomePage {
     this.router.navigate(['/details'], navigationExtras);
   }
 
-  // public data = ['Amsterdam', 'Buenos Aires', 'Cairo', 'Geneva', 'Hong Kong', 'Istanbul', 'London', 'Madrid', 'New York', 'Panama City'];
-  // public results = [...this.moviesList]
-  // handleChange(event) {
-  //   console.log('moviesList', this.moviesList)
-  //   console.log('data', this.data)
-  //   console.log('results', this.results)
-  //   const query = event.target.value.toLowerCase()
-  //   this.results = this.moviesList.filter(d => d.toLowerCase().indexOf(query) > -1)
-  // }
+  addFavorite(film: any) {
+    this.favoriteFilmList.push(film)
+    this.storage.set('favoriteFilmsList', this.favoriteFilmList)
 
-  // public data = ['Amsterdam', 'Buenos Aires', 'Cairo', 'Geneva', 'Hong Kong', 'Istanbul', 'London', 'Madrid', 'New York', 'Panama City'];
-  // public results = [...this.data];
+    this.idFavoriteList.push(film.id)
+    this.storage.set('idFavoriteFilmsList', this.idFavoriteList)
+  }
 
-  // handleChange(event) {
-  //   console.log(this.results)
-  //   const query = event.target.value.toLowerCase();
-  //   this.results = this.data.filter(d => d.toLowerCase().indexOf(query) > -1);
-  // }
+  removeFavorite(film: any) {
+    const index = this.idFavoriteList.indexOf(film.id)
+
+    if (index > -1) {
+      this.favoriteFilmList.splice(index, 1)
+      this.storage.set('favoriteFilmsList', this.favoriteFilmList)
+
+      this.idFavoriteList.splice(index, 1)
+      this.storage.set('idFavoriteFilmsList', this.idFavoriteList)
+    }
+  }
+
+    // Permet d'aller sur la page correspondant à la route /home
+    gotoPageAccueil() {
+      this.router.navigate(['/home']);
+    }
+
+    // Permet d'aller sur la page correspondant à la route /favoris
+    gotoPageFavoris() {
+      this.router.navigate(['/favorite'],{});
+    }
 }
